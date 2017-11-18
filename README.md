@@ -1,3 +1,7 @@
 # cling-build
 
-Build cling in ubuntu:trusty docker container with g++-6.
+Build cling in ubuntu:trusty docker container with g++-6. run
+
+    make all
+
+
