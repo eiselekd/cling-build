@@ -12,7 +12,7 @@ cling-build-prepare:
 	apt-get install -y software-properties-common
 	add-apt-repository -y ppa:ubuntu-toolchain-r/test
 	apt-get update
-	apt-get install -y build-essential curl wget
+	apt-get install -y build-essential curl wget git
 	apt-get install -y gcc-6 
 	apt-get install -y g++-6
 
