@@ -27,4 +27,4 @@ cling-build: cling-build-prepare
 	cd cling; tools/packaging/cpt.py --no-test --tarball-tag=master --with-cling-url=https://github.com/root-project/cling --with-clang-url=http://root.cern.ch/git/clang.git --with-llvm-url=http://root.cern.ch/git/llvm.git '--with-cmake-flags=-DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON -DCXX_EXTENSIONS=OFF'
 
 docker:
-	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:trusty bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make all'
+	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:trusty bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build'
