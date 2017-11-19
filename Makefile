@@ -16,7 +16,7 @@ cling-build-prepare-precise:
 	apt-get install -y software-properties-common python-software-properties
 	add-apt-repository -y ppa:ubuntu-toolchain-r/test
 	apt-get update
-	apt-get install -y build-essential curl wget git python gcc-4.9 g++-4.9
+	apt-get install -y build-essential curl wget git python gcc-4.8 g++-4.8
 
 cling-build-precise: cling-build-prepare-precise
 	mkdir -p $(CURDIR)/dep/cmake
@@ -24,14 +24,14 @@ cling-build-precise: cling-build-prepare-precise
 	rm -rf cling
 	git clone https://github.com/root-project/cling
 	export CMAKE=$(CURDIR)/dep/cmake/bin/cmake; \
-	export CXX="g++-4.9"; \
-	export CC="gcc-4.9"; \
+	export CXX="g++-4.8"; \
+	export CC="gcc-4.8"; \
 	cd cling; tools/packaging/cpt.py --no-test --tarball-tag=master --with-cling-url=https://github.com/root-project/cling --with-clang-url=http://root.cern.ch/git/clang.git --with-llvm-url=http://root.cern.ch/git/llvm.git 
 
 docker-precise:
 	sudo apt-get install -y docker.io
 	sudo service docker restart
-	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:precise bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build; bash build.sh'
+	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:precise bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build-precise; bash build.sh'
 
 ##########################################
 # trusty
@@ -55,7 +55,7 @@ cling-build-trusty: cling-build-prepare-trusty
 docker-trusty:
 	sudo apt-get install -y docker.io
 	sudo service docker restart
-	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:trusty bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build; bash build.sh'
+	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:trusty bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build-trusty; bash build.sh'
 
 
 
