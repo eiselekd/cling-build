@@ -7,7 +7,6 @@ cling:
 	wget https://root.cern.ch/download/cling/cling_2017-11-02_ubuntu16.tar.bz2
 	wget https://root.cern.ch/download/cling/cling_2017-11-13_ubuntu16.tar.bz2
 
-
 ##########################################
 # precise
 
@@ -23,6 +22,8 @@ cling-build-precise: cling-build-prepare-precise
 	curl -k https://cmake.org/files/v3.6/cmake-3.6.0-Linux-x86_64.tar.gz | tar --strip-components=1 -xz -C $(CURDIR)/dep/cmake
 	rm -rf cling
 	git clone https://github.com/root-project/cling
+	ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.*
+	strings /usr/lib/x86_64-linux-gnu/libstdc++.so.* | grep GLIBCXX
 	export CMAKE=$(CURDIR)/dep/cmake/bin/cmake; \
 	export CXX="g++-4.8"; \
 	export CC="gcc-4.8"; \
@@ -47,6 +48,8 @@ cling-build-trusty: cling-build-prepare-trusty
 	curl -k https://cmake.org/files/v3.8/cmake-3.8.0-Linux-x86_64.tar.gz | tar --strip-components=1 -xz -C $(CURDIR)/dep/cmake
 	rm -rf cling
 	git clone https://github.com/root-project/cling
+	ls -la /usr/lib/x86_64-linux-gnu/libstdc++.so.*
+	strings /usr/lib/x86_64-linux-gnu/libstdc++.so.* | grep GLIBCXX
 	export CMAKE=$(CURDIR)/dep/cmake/bin/cmake; \
 	export CXX="g++-6"; \
 	export CC="gcc-6"; \
@@ -56,8 +59,4 @@ docker-trusty:
 	sudo apt-get install -y docker.io
 	sudo service docker restart
 	sudo docker run -it --rm -v $(CURDIR):/home/build/share ubuntu:trusty bash -c 'cd /home/build/share/; apt-get update; apt-get install -y make; make cling-build-trusty; bash build.sh'
-
-
-
-
 
