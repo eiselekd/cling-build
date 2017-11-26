@@ -1,7 +1,7 @@
 # cling-build
 
 Build cling in ubuntu:precise/trusty docker container that matches TravisCI's
-http://us-central1.gce.archive.ubuntu.com based setup. Run
+http://us-central1.gce.archive.ubuntu.com based setup.  Run
 
     make gen-trusty-prepare
     make gen-trusty
